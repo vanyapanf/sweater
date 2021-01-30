@@ -125,4 +125,16 @@ public class UserService implements UserDetailsService {
             mailSender.send(user.getEmail(), "Activation code", message);
         }
     }
+
+    public void subscribe(User currentUser, User user) {
+        user.getSubscribers().add(currentUser);
+
+        userRepo.save(user);
+    }
+
+    public void unsubscribe(User currentUser, User user) {
+        user.getSubscribers().remove(currentUser);
+
+        userRepo.save(user);
+    }
 }
